@@ -167,9 +167,11 @@ h1, h2, h3 {
 .services {
   padding: 100px 60px;
   text-align: center;
-  background: rgba(15, 23, 42, 0.80);
-  backdrop-filter: blur(12px);
-  margin: 0 -60px;
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin: 0;
   position: relative;
   z-index: 1;
 }
@@ -194,11 +196,12 @@ h1, h2, h3 {
 }
 
 .service-card {
-  background: rgba(15, 23, 42, 0.88);
-  padding: 40px 28px;
-  border-radius: 20px;
-  box-shadow: 0 28px 70px rgba(0,0,0,0.25);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #ffffff;
+  padding: 36px 28px;
+  border-radius: 16px;
+  box-shadow: 0 18px 40px rgba(2,8,20,0.06);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  color: #1c2732;
 }
 
 .service-card:hover {
@@ -255,33 +258,25 @@ h1, h2, h3 {
 
 /* CTA */
 .cta {
-  width: 100%;
-  margin: 40px 0;
-  padding: 60px 0;
-  background: transparent;
-}
-
-.cta__inner {
-  max-width: 1100px;
-  margin: 0 auto;
   text-align: center;
-  padding: 56px 48px;
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 30px 60px rgba(1, 8, 20, 0.08);
-  backdrop-filter: blur(12px);
-  border-radius: 24px;
+  padding: 90px 20px;
+  background: rgba(12, 20, 30, 0.70);
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 30px 60px rgba(2,8,20,0.28);
+  backdrop-filter: blur(14px);
+  border-radius: 30px;
+  margin: 0 40px;
 }
 
-.cta__inner h2 {
+.cta h2 {
   font-size: 2rem;
   margin-bottom: 15px;
-  color: #1c2732;
-  text-shadow: 0 6px 18px rgba(255,255,255,0.6);
+  color: #f8fafc;
+  text-shadow: 0 8px 24px rgba(0,0,0,0.35);
 }
 
-.cta__inner p {
-  color: rgba(28,39,50,0.85);
+.cta p {
+  color: rgba(248,250,252,0.88);
   margin-bottom: 30px;
 }
 
