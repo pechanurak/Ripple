@@ -29,21 +29,42 @@ h1, h2, h3 {
 
 /* HEADER */
 .header {
+  position: fixed;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 18px 60px;
+  width: 100%;
+  max-width: 1200px;
   background: rgba(255, 255, 255, 0.95);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  position: sticky;
-  top: 0;
   z-index: 100;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  transition: all 0.35s ease;
+}
+
+.header::after {
+  content: '';
+  display: none;
+}
+
+.header.header--compact {
+  width: 190px;
+  height: 90px;
+  padding: 12px 0 10px;
+  justify-content: center;
+  border-radius: 0 0 95px 95px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
 }
 
 .logo img {
-  height: 48px;
+  height: 40px;
   display: block;
+  transition: height 0.35s ease;
 }
 
 .nav a {
@@ -52,7 +73,11 @@ h1, h2, h3 {
   margin-left: 30px;
   font-weight: 700;
   font-size: 0.95rem;
-  transition: color 0.25s ease;
+  transition: color 0.25s ease, opacity 0.35s ease, transform 0.35s ease;
+}
+
+.header.header--compact .nav {
+  display: none;
 }
 
 .nav a:hover,

@@ -75,3 +75,28 @@
 <footer class="footer">
   <p>&copy; 2026 RiPPLE Design & Construction. All rights reserved.</p>
 </footer>
+
+<script>
+  const header = document.querySelector('.header');
+  let lastScroll = window.pageYOffset;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    const isScrollingDown = currentScroll > lastScroll;
+    const shouldCompact = currentScroll > 180 && isScrollingDown;
+
+    if (shouldCompact) {
+      header.classList.add('header--compact');
+    } else if (currentScroll < 120 || !isScrollingDown) {
+      header.classList.remove('header--compact');
+    }
+
+    lastScroll = currentScroll;
+  });
+
+  header.addEventListener('click', () => {
+    if (header.classList.contains('header--compact')) {
+      header.classList.remove('header--compact');
+    }
+  });
+</script>
