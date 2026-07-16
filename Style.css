@@ -167,10 +167,11 @@ h1, h2, h3 {
 .services {
   padding: 100px 60px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255,255,255,0.12);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  /* white translucent similar to header but not fully opaque */
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  border-top: 1px solid rgba(0,0,0,0.04);
+  border-bottom: 1px solid rgba(0,0,0,0.03);
   margin: 0;
   position: relative;
   z-index: 1;
@@ -187,6 +188,7 @@ h1, h2, h3 {
 .section-title {
   font-size: clamp(2rem, 3vw, 2.5rem);
   margin-bottom: 50px;
+  color: #1c2732;
 }
 
 .service-grid {
@@ -227,9 +229,13 @@ h1, h2, h3 {
 }
 
 .service-card p {
-  color: var(--gray);
+  color: #475163;
   line-height: 1.6;
   font-size: 0.95rem;
+}
+
+.service-card h3 {
+  color: #1c2732;
 }
 
 /* WHY US */
@@ -258,25 +264,27 @@ h1, h2, h3 {
 
 /* CTA */
 .cta {
+  /* light glass panel similar to .hero-content */
   text-align: center;
   padding: 90px 20px;
-  background: rgba(12, 20, 30, 0.70);
-  border: 1px solid rgba(255,255,255,0.04);
-  box-shadow: 0 30px 60px rgba(2,8,20,0.28);
-  backdrop-filter: blur(14px);
-  border-radius: 30px;
-  margin: 0 40px;
+  max-width: 1100px;
+  margin: 40px auto;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 32px 60px rgba(8, 15, 22, 0.18);
+  backdrop-filter: blur(18px);
+  border-radius: 28px;
 }
 
 .cta h2 {
   font-size: 2rem;
   margin-bottom: 15px;
-  color: #f8fafc;
-  text-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  color: #ffffff;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.28);
 }
 
 .cta p {
-  color: rgba(248,250,252,0.88);
+  color: rgba(255,255,255,0.88);
   margin-bottom: 30px;
 }
 
