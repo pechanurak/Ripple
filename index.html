@@ -67,9 +67,11 @@
 </section>
 
 <section class="cta">
-  <h2>พร้อมเริ่มต้นโปรเจกต์ของคุณแล้วหรือยัง?</h2>
-  <p>ปรึกษาฟรี ไม่มีค่าใช้จ่าย ทีมงานพร้อมให้คำแนะนำ</p>
-  <button class="btn-primary">ติดต่อเรา</button>
+  <div class="cta__inner">
+    <h2>พร้อมเริ่มต้นโปรเจกต์ของคุณแล้วหรือยัง?</h2>
+    <p>ปรึกษาฟรี ไม่มีค่าใช้จ่าย ทีมงานพร้อมให้คำแนะนำ</p>
+    <button class="btn-primary">ติดต่อเรา</button>
+  </div>
 </section>
 
 <footer class="footer">
@@ -79,23 +81,36 @@
 <script>
   const header = document.querySelector('.header');
   let lastScroll = window.pageYOffset;
+  let compactTimeout = null;
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
     const isScrollingDown = currentScroll > lastScroll;
-    const shouldCompact = currentScroll > 180 && isScrollingDown;
 
-    if (shouldCompact) {
-      header.classList.add('header--compact');
-    } else if (currentScroll < 120 || !isScrollingDown) {
-      header.classList.remove('header--compact');
+    if (isScrollingDown && currentScroll > 180) {
+      if (compactTimeout === null) {
+        compactTimeout = window.setTimeout(() => {
+          header.classList.add('header--compact');
+          compactTimeout = null;
+        }, 1000);
+      }
+    } else {
+      if (compactTimeout !== null) {
+        window.clearTimeout(compactTimeout);
+        compactTimeout = null;
+      }
+
+      if (currentScroll <= 20) {
+        header.classList.remove('header--compact');
+      }
     }
 
     lastScroll = currentScroll;
   });
 
-  header.addEventListener('click', () => {
+  header.addEventListener('click', (event) => {
     if (header.classList.contains('header--compact')) {
+      event.preventDefault();
       header.classList.remove('header--compact');
     }
   });
