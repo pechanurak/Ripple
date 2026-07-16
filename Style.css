@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap');
+
 :root {
   --navy: #2E333D;
   --blue: #1E3FCC;
@@ -255,7 +257,10 @@ h1, h2, h3 {
 }
 
 .stat h3 {
-  font-size: 2.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.0rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   color: var(--orange);
 }
 

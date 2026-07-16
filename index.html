@@ -57,21 +57,19 @@
     <p>ปีประสบการณ์</p>
   </div>
   <div class="stat">
-    <h3>200+</h3>
+    <h3>50+</h3>
     <p>โปรเจกต์ที่สำเร็จ</p>
   </div>
   <div class="stat">
-    <h3>100%</h3>
+    <h3>99.9%</h3>
     <p>ลูกค้าพึงพอใจ</p>
   </div>
 </section>
 
 <section class="cta">
-  <div class="cta__inner">
-    <h2>พร้อมเริ่มต้นโปรเจกต์ของคุณแล้วหรือยัง?</h2>
-    <p>ปรึกษาฟรี ไม่มีค่าใช้จ่าย ทีมงานพร้อมให้คำแนะนำ</p>
-    <button class="btn-primary">ติดต่อเรา</button>
-  </div>
+  <h2>พร้อมเริ่มต้นโปรเจกต์ของคุณแล้วหรือยัง?</h2>
+  <p>ปรึกษาฟรี ไม่มีค่าใช้จ่าย ทีมงานพร้อมให้คำแนะนำ</p>
+  <button class="btn-primary">ติดต่อเรา</button>
 </section>
 
 <footer class="footer">
@@ -108,10 +106,13 @@
     lastScroll = currentScroll;
   });
 
-  header.addEventListener('click', (event) => {
-    if (header.classList.contains('header--compact')) {
-      event.preventDefault();
-      header.classList.remove('header--compact');
+  header.addEventListener('mouseenter', () => {
+    header.classList.remove('header--compact');
+  });
+
+  header.addEventListener('mouseleave', () => {
+    if (window.pageYOffset > 180) {
+      header.classList.add('header--compact');
     }
   });
 </script>
