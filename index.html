@@ -98,7 +98,7 @@
         compactTimeout = null;
       }
 
-      if (currentScroll <= 20) {
+      if (currentScroll <= 180) {
         header.classList.remove('header--compact');
       }
     }
@@ -106,13 +106,38 @@
     lastScroll = currentScroll;
   });
 
-  header.addEventListener('mouseenter', () => {
+  const logo = document.querySelector('.logo');
+  let logoCollapseTimer = null;
+
+  const clearLogoCollapseTimer = () => {
+    if (logoCollapseTimer !== null) {
+      window.clearTimeout(logoCollapseTimer);
+      logoCollapseTimer = null;
+    }
+  };
+
+  const scheduleLogoCollapse = () => {
+    clearLogoCollapseTimer();
+    if (window.pageYOffset > 180) {
+      logoCollapseTimer = window.setTimeout(() => {
+        if (!header.matches(':hover')) {
+          header.classList.add('header--compact');
+        }
+        logoCollapseTimer = null;
+      }, 1000);
+    }
+  };
+
+  logo.addEventListener('mouseenter', () => {
     header.classList.remove('header--compact');
+    clearLogoCollapseTimer();
+  });
+
+  header.addEventListener('mouseenter', () => {
+    clearLogoCollapseTimer();
   });
 
   header.addEventListener('mouseleave', () => {
-    if (window.pageYOffset > 180) {
-      header.classList.add('header--compact');
-    }
+    scheduleLogoCollapse();
   });
 </script>
