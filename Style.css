@@ -168,10 +168,10 @@ h1, h2, h3 {
   padding: 100px 60px;
   text-align: center;
   /* white translucent similar to header but not fully opaque */
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.750);
   backdrop-filter: blur(4px);
   border-top: 1px solid rgba(0,0,0,0.04);
-  border-bottom: 1px solid rgba(0,0,0,0.03);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.245);
   margin: 0;
   position: relative;
   z-index: 1;
@@ -240,7 +240,9 @@ h1, h2, h3 {
 
 /* WHY US */
 .why-us {
-  background: var(--navy);
+  background: rgba(255, 255, 255, 0.750);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
   color: #fff;
   display: flex;
   justify-content: center;
@@ -258,7 +260,7 @@ h1, h2, h3 {
 }
 
 .stat p {
-  color: #cbd5e1;
+  color: #475163;
   margin-top: 8px;
 }
 
