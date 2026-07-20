@@ -7,6 +7,7 @@
 </script>
 <link rel="stylesheet" href="Style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
 
 <header class="header">
   <a class="logo" href="index.html">
@@ -21,27 +22,35 @@
 </header>
 
 <main>
-  <section class="contact-hero" style="padding:80px 60px; text-align:center;">
-    <p class="section-label">ติดต่อเรา</p>
-    <h2 class="section-title">ปรึกษาโปรเจกต์ของคุณ</h2>
-    <p>ปรึกษาฟรี ไม่มีค่าใช้จ่าย ทีมงานพร้อมให้คำแนะนำ</p>
+  <section class="contact-hero">
+    <div class="hero-content">
+      <p class="section-label">ติดต่อเรา</p>
+      <h2 class="section-title">ปรึกษาโปรเจกต์ของคุณ</h2>
+      <p class="services-desc">ปรึกษาฟรี ไม่มีค่าใช้จ่าย ทีมงานพร้อมให้คำแนะนำ</p>
+    </div>
   </section>
 
-  <section class="contact-info" style="padding:30px 60px; display:flex; gap:40px; align-items:flex-start;">
-    <div style="flex:1;">
-      <h3>ข้อมูลติดต่อ</h3>
-      <p><i class="fas fa-phone"></i> 02-123-4567</p>
-      <p><i class="fas fa-envelope"></i> contact@example.com</p>
-      <p><i class="fas fa-map-marker-alt"></i> ที่อยู่บริษัท</p>
-    </div>
-    <div style="flex:1;">
-      <h3>ส่งข้อความถึงเรา</h3>
-      <form>
-        <input placeholder="ชื่อ" style="width:100%; padding:10px; margin-bottom:8px;">
-        <input placeholder="อีเมล" style="width:100%; padding:10px; margin-bottom:8px;">
-        <textarea placeholder="รายละเอียดโปรเจกต์" style="width:100%; padding:10px; height:120px;"></textarea>
-        <button class="btn-primary" style="margin-top:8px;">ส่งข้อความ</button>
-      </form>
+  <section class="contact-info">
+    <div class="contact-content">
+      <div class="contact-details">
+        <div class="details-box">
+          <h3>ข้อมูลติดต่อ</h3>
+          <p><i class="fas fa-phone"></i> 097-150-2270</p>
+          <p><i class="fas fa-envelope"></i> Anurak@ripple-th.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> 239/5 ตำบลสทิงหม้อ อำเภอสิงหนคร จังหวัดสงขลา</p>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-box">
+          <h3>ส่งข้อความถึงเรา</h3>
+          <form id="contactForm">
+            <input type="text" name="user_name" placeholder="ชื่อ" required>
+            <input type="email" name="user_email" placeholder="อีเมล" required>
+            <textarea name="message" placeholder="รายละเอียดโปรเจกต์" required></textarea>
+            <button type="submit" class="btn-primary">ส่งข้อความ</button>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -51,3 +60,20 @@
 </footer>
 
 <script src="header.js"></script>
+<script>
+  // Initialize EmailJS with your Public Key
+  emailjs.init("zcDJcfPYXdO7v3RZb");
+
+  // Handle form submission
+  document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    emailjs.sendForm("service_I35mzal", "template_7g39ccq", this)
+      .then(function() {
+        alert("✓ ส่งข้อความสำเร็จ! ทีมงานจะติดต่อกลับไปในไม่ช้า");
+        document.getElementById("contactForm").reset();
+      }, function(error) {
+        alert("✗ ส่งข้อความล้มเหลว: " + error.text);
+      });
+  });
+</script>
