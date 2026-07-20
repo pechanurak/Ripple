@@ -21,35 +21,45 @@
 </header>
 
 <main>
-  <section class="portfolio-hero" style="padding:100px 60px; text-align:center;">
-    <p class="section-label">ผลงานของเรา</p>
-    <h2 class="section-title">โครงการที่ผ่านมา</h2>
-    <p>ออกแบบและก่อสร้างครบวงจร ทั้งบ้านพักอาศัย คอนโด และโรงงาน</p>
-    <button class="btn-primary" style="margin-top:20px;">ดูงานทั้งหมด</button>
+  <section class="portfolio-hero">
+    <div class="hero-content">
+      <p class="section-label">ผลงานของเรา</p>
+      <h2 class="section-title">โครงการที่ผ่านมา</h2>
+      <p class="services-desc">ออกแบบและก่อสร้างครบวงจร ทั้งบ้านพักอาศัย คอนโด และโรงงาน</p>
+    </div>
   </section>
 
-  <section class="portfolio-filter" style="padding:40px 60px; text-align:center;">
-    <button class="btn-outline">บ้าน</button>
-    <button class="btn-outline">คอนโด</button>
-    <button class="btn-outline">โรงงาน</button>
-    <button class="btn-outline">รีโนเวท</button>
+  <section class="portfolio-filter">
+    <div class="filter-buttons">
+      <button class="btn-outline filter-btn active" data-filter="all">ทั้งหมด</button>
+      <button class="btn-outline filter-btn" data-filter="house">บ้าน</button>
+      <button class="btn-outline filter-btn" data-filter="condo">คอนโด</button>
+      <button class="btn-outline filter-btn" data-filter="factory">โรงงาน</button>
+      <button class="btn-outline filter-btn" data-filter="renovate">รีโนเวท</button>
+    </div>
   </section>
 
-  <section class="project-grid" style="padding:40px 60px; display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
-    <article class="project-card">
-      <img src="assets/images/sample1.jpg" alt="project" style="width:100%; border-radius:12px; display:block;">
-      <h3 style="margin-top:12px;">บ้านเดี่ยวสไตล์โมเดิร์น</h3>
-      <p>บ้านพักอาศัย 4 ห้องนอน</p>
+  <section class="project-grid">
+    <article class="project-card" data-category="house">
+      <img src="assets/images/house.jpg" alt="บ้านเดี่ยวสไตล์โมเดิร์น">
+      <div class="project-card-body">
+        <h3>บ้านเดี่ยวสไตล์โมเดิร์น</h3>
+        <p>บ้านพักอาศัย 4 ห้องนอน</p>
+      </div>
     </article>
-    <article class="project-card">
-      <img src="assets/images/sample2.jpg" alt="project" style="width:100%; border-radius:12px; display:block;">
-      <h3 style="margin-top:12px;">คอนโดแต่งครบ</h3>
-      <p>คอนโดมิเนียม บนทำเลดี</p>
+    <article class="project-card" data-category="condo">
+      <img src="assets/images/house.jpg" alt="คอนโดแต่งครบ">
+      <div class="project-card-body">
+        <h3>คอนโดแต่งครบ</h3>
+        <p>คอนโดมิเนียม บนทำเลดี</p>
+      </div>
     </article>
-    <article class="project-card">
-      <img src="assets/images/sample3.jpg" alt="project" style="width:100%; border-radius:12px; display:block;">
-      <h3 style="margin-top:12px;">โรงงานอุตสาหกรรม</h3>
-      <p>คลังสินค้าและโรงงานมาตรฐาน</p>
+    <article class="project-card" data-category="factory">
+      <img src="assets/images/house.jpg" alt="โรงงานอุตสาหกรรม">
+      <div class="project-card-body">
+        <h3>โรงงานอุตสาหกรรม</h3>
+        <p>คลังสินค้าและโรงงานมาตรฐาน</p>
+      </div>
     </article>
   </section>
 </main>
@@ -57,5 +67,23 @@
 <footer class="footer">
   <p>&copy; 2026 RiPPLE Design & Construction. All rights reserved.</p>
 </footer>
+
+<script src="header.js"></script>
+<script>
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const filter = button.dataset.filter;
+      projectCards.forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+      });
+    });
+  });
+</script>
 
 <script src="header.js"></script>
