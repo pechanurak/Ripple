@@ -47,6 +47,13 @@
         <p>บ้านพักอาศัย 4 ห้องนอน</p>
       </div>
     </article>
+    <article class="project-card" data-category="house" data-link="project-muji-house.html">
+      <img src="assets/images/House%20MUJI.png" alt="บ้านเดี่ยวสไตล์ MUJI">
+      <div class="project-card-body">
+        <h3>บ้านเดี่ยวสไตล์ MUJI</h3>
+        <p>บ้านพักอาศัย 2 ห้องนอน 2 ห้องน้ำ</p>
+      </div>
+    </article>
     <article class="project-card" data-category="condo">
       <img src="assets/images/house.jpg" alt="คอนโดแต่งครบ">
       <div class="project-card-body">
@@ -63,6 +70,12 @@
     </article>
   </section>
 </main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="ปิด">&times;</button>
+  <img src="" alt="" id="lightboxImg">
+  <p class="lightbox-caption" id="lightboxCaption"></p>
+</div>
 
 <footer class="footer">
   <p>&copy; 2026 RiPPLE Design & Construction. All rights reserved.</p>
@@ -84,6 +97,33 @@
       });
     });
   });
-</script>
 
-<script src="header.js"></script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  projectCards.forEach(card => {
+    card.addEventListener('click', () => {
+      if (card.dataset.link) {
+        window.location.href = card.dataset.link;
+        return;
+      }
+      const img = card.querySelector('img');
+      const title = card.querySelector('h3').textContent;
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCaption.textContent = title;
+      lightbox.classList.add('active');
+    });
+  });
+
+  const closeLightbox = () => lightbox.classList.remove('active');
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>

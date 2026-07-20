@@ -46,6 +46,10 @@
           <form id="contactForm">
             <input type="text" name="user_name" placeholder="ชื่อ" required>
             <input type="email" name="user_email" placeholder="อีเมล" required>
+            <label class="project-tag" id="projectTag" style="display:none;">
+              <input type="checkbox" id="projectCheckbox" checked>
+              สนใจปรึกษาโครงการ: <span id="projectNameLabel"></span>
+            </label>
             <textarea name="message" placeholder="รายละเอียดโปรเจกต์" required></textarea>
             <button type="submit" class="btn-primary">ส่งข้อความ</button>
           </form>
@@ -63,6 +67,31 @@
 <script>
   // Initialize EmailJS with your Public Key
   emailjs.init("zcDJcfPYXdO7v3RZb");
+
+  // Pre-fill message with the project name when arriving from a project detail page
+  const projectName = new URLSearchParams(window.location.search).get('project');
+  const messageField = document.querySelector('#contactForm textarea[name="message"]');
+  const projectTag = document.getElementById('projectTag');
+  const projectCheckbox = document.getElementById('projectCheckbox');
+
+  if (projectName) {
+    const prefix = `สนใจปรึกษาโครงการ: ${projectName}\n\n`;
+    document.getElementById('projectNameLabel').textContent = projectName;
+    projectTag.style.display = 'flex';
+    messageField.value = prefix;
+    messageField.focus();
+    messageField.setSelectionRange(prefix.length, prefix.length);
+
+    projectCheckbox.addEventListener('change', () => {
+      if (projectCheckbox.checked) {
+        if (!messageField.value.startsWith(prefix)) {
+          messageField.value = prefix + messageField.value;
+        }
+      } else if (messageField.value.startsWith(prefix)) {
+        messageField.value = messageField.value.slice(prefix.length);
+      }
+    });
+  }
 
   // Handle form submission
   document.getElementById("contactForm").addEventListener("submit", function(e) {
