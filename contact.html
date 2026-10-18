@@ -36,7 +36,7 @@
         <div class="details-box">
           <h3>ข้อมูลติดต่อ</h3>
           <p><i class="fas fa-phone"></i> 097-150-2270</p>
-          <p><i class="fas fa-envelope"></i> Anurak@ripple-th.com</p>
+          <p><i class="fas fa-envelope"></i> Pech.anurak@gmail.com</p>
           <p><i class="fas fa-map-marker-alt"></i> 239/5 ตำบลสทิงหม้อ อำเภอสิงหนคร จังหวัดสงขลา</p>
         </div>
       </div>
@@ -44,13 +44,13 @@
         <div class="form-box">
           <h3>ส่งข้อความถึงเรา</h3>
           <form id="contactForm">
-            <input type="text" name="user_name" placeholder="ชื่อ" required>
-            <input type="email" name="user_email" placeholder="อีเมล" required>
+            <input type="text" name="name" placeholder="ชื่อ" required>
+            <input type="text" name="contact" placeholder="ข้อมูลติดต่อกลับ (เบอร์โทรศัพท์หรืออีเมล)" required>
             <label class="project-tag" id="projectTag" style="display:none;">
               <input type="checkbox" id="projectCheckbox" checked>
               สนใจปรึกษาโครงการ: <span id="projectNameLabel"></span>
             </label>
-            <textarea name="message" placeholder="รายละเอียดโปรเจกต์" required></textarea>
+            <textarea name="title" placeholder="รายละเอียด" required></textarea>
             <button type="submit" class="btn-primary">ส่งข้อความ</button>
           </form>
         </div>
@@ -59,18 +59,56 @@
   </section>
 </main>
 
+<div id="formToast" class="form-toast" aria-live="polite" aria-atomic="true">
+  <div class="toast-content">
+    <i class="toast-icon"></i>
+    <div>
+      <strong class="toast-title"></strong>
+      <span class="toast-message"></span>
+    </div>
+  </div>
+</div>
+
 <footer class="footer">
   <p>&copy; 2026 RiPPLE Design & Construction. All rights reserved.</p>
 </footer>
 
 <script src="header.js"></script>
 <script>
-  // Initialize EmailJS with your Public Key
-  emailjs.init("zcDJcfPYXdO7v3RZb");
+  // Initialize EmailJS with the new Public Key
+  emailjs.init("J3QgpxQ8ZMSjF_8Vf");
+
+  const toast = document.getElementById('formToast');
+  const toastTitle = toast.querySelector('.toast-title');
+  const toastMessage = toast.querySelector('.toast-message');
+  const toastIcon = toast.querySelector('.toast-icon');
+
+  function showToast(type, title, message) {
+    toast.classList.remove('show-success', 'show-error');
+    toast.classList.add(type === 'success' ? 'show-success' : 'show-error');
+    toastTitle.textContent = title;
+    toastMessage.textContent = message;
+    toastIcon.className = 'toast-icon ' + (type === 'success' ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark');
+    toast.classList.add('show');
+
+    clearTimeout(showToast.timeoutId);
+    showToast.timeoutId = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 4000);
+  }
+
+  function isValidContact(value) {
+    const trimmed = value.trim();
+    if (!trimmed) return false;
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern = /^[0-9\-+()\s]{8,15}$/;
+    return emailPattern.test(trimmed) || phonePattern.test(trimmed);
+  }
 
   // Pre-fill message with the project name when arriving from a project detail page
   const projectName = new URLSearchParams(window.location.search).get('project');
-  const messageField = document.querySelector('#contactForm textarea[name="message"]');
+  const messageField = document.querySelector('#contactForm textarea[name="title"]');
   const projectTag = document.getElementById('projectTag');
   const projectCheckbox = document.getElementById('projectCheckbox');
 
@@ -96,13 +134,20 @@
   // Handle form submission
   document.getElementById("contactForm").addEventListener("submit", function(e) {
     e.preventDefault();
-    
-    emailjs.sendForm("service_pugj1za", "template_7g39ccq", this)
+
+    const contactInput = this.elements.contact;
+    if (!isValidContact(contactInput.value)) {
+      showToast('error', 'ข้อมูลติดต่อไม่ถูกต้อง', 'กรุณากรอกเบอร์โทรศัพท์หรืออีเมลให้ถูกต้อง');
+      contactInput.focus();
+      return;
+    }
+
+    emailjs.sendForm("service_oydc0ys", "template_w71ngmh", this)
       .then(function() {
-        alert("✓ ส่งข้อความสำเร็จ! ทีมงานจะติดต่อกลับไปในไม่ช้า");
+        showToast('success', 'ส่งข้อความสำเร็จ', 'ทีมงานจะติดต่อกลับไปในไม่ช้า');
         document.getElementById("contactForm").reset();
       }, function(error) {
-        alert("✗ ส่งข้อความล้มเหลว: " + error.text);
+        showToast('error', 'ส่งข้อความไม่สำเร็จ', 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
       });
   });
 </script>
