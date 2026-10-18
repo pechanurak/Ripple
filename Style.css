@@ -661,6 +661,11 @@ h1, h2, h3 {
   transition: all 0.25s ease;
 }
 
+.form-box textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
 .form-box input::placeholder,
 .form-box textarea::placeholder {
   color: rgba(255,255,255,0.6);
